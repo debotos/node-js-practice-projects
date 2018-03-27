@@ -1,7 +1,9 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
+const FacebookStrategy = require('passport-facebook').Strategy;
 
 const User = require('../app/models/user');
+const keys = require('./keys');
 
 // passport session setup
 // required for persistent login sessions
@@ -14,7 +16,9 @@ passport.deserializeUser((id, done) => {
     done(err, user);
   });
 });
-
+//================
+//  Local Strategy
+//================
 // Local Signup (named strategies)
 passport.use(
   'local-signup',
@@ -54,7 +58,7 @@ passport.use(
     }
   )
 );
-
+// Local Login Strategy
 passport.use(
   'local-login',
   new LocalStrategy(
@@ -75,6 +79,48 @@ passport.use(
           return done(null, false, req.flash('loginMessage', 'Oops! Wrong Password !'));
         }
         return done(null, user);
+      });
+    }
+  )
+);
+
+//==================
+// Facebook Strategy
+//==================
+passport.use(
+  new FacebookStrategy(
+    {
+      clientID: keys.facebookAuth.clientID,
+      clientSecret: keys.facebookAuth.clientSecret,
+      callbackURL: keys.facebookAuth.callbackURL
+      // In Facebook app at the "Valid OAuth Redirect URIs" section add this url
+    },
+    (token, refreshToken, profile, done) => {
+      console.log('Facebook Profile => ', profile);
+      // Facebook will return token and profile
+      // Asynchronous
+      process.nextTick(() => {
+        User.findOne({ 'facebook.id': profile.id }, (err, user) => {
+          if (err) return done(err);
+          if (user) {
+            return done(null, user);
+          }
+          const newUser = new User();
+
+          newUser.facebook.id = profile.id;
+          newUser.facebook.token = token;
+          newUser.facebook.name = `${profile.name.giveName} ${profile.name.familyName}`;
+          if (profile.emails) {
+            newUser.facebook.email = profile.emails[0].value;
+          }
+
+          newUser.save(error => {
+            if (error) {
+              throw error;
+            }
+            return done(null, newUser);
+          });
+        });
       });
     }
   )

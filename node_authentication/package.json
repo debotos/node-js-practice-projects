@@ -5,6 +5,12 @@
   "main": "server.js",
   "author": "debotosdas@gmail.com",
   "license": "MIT",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": "8.9.4"
+  },
   "dependencies": {
     "bcrypt-nodejs": "^0.0.3",
     "body-parser": "^1.18.2",

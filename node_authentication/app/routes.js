@@ -43,6 +43,23 @@ module.exports = (app, passport) => {
     });
   });
 
+  // Facebook auth Routes
+  app.get(
+    '/auth/facebook',
+    passport.authenticate('facebook', {
+      scope: ['public_profile', 'email']
+    })
+  );
+
+  // Face auth callback route
+  app.get(
+    '/auth/facebook/callback',
+    passport.authenticate('facebook', {
+      successRedirect: '/profile',
+      failureRedirect: '/'
+    })
+  );
+
   // Logout
   app.get('/logout', (req, res) => {
     res.logout();
