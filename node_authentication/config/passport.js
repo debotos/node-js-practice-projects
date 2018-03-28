@@ -3,6 +3,8 @@ const LocalStrategy = require('passport-local').Strategy;
 const FacebookStrategy = require('passport-facebook').Strategy;
 const TwitterStrategy = require('passport-twitter').Strategy;
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+const GitHubStrategy = require('passport-github').Strategy;
+const LinkedInStrategy = require('passport-linkedin').Strategy;
 
 const User = require('../app/models/user');
 const keys = require('./keys');
@@ -300,6 +302,164 @@ passport.use(
           user.google.token = token;
           user.google.name = profile.displayName;
           user.google.email = profile.emails[0].value;
+
+          user.save(error => {
+            if (error) {
+              throw error;
+            }
+            return done(null, user);
+          });
+        }
+      });
+    }
+  )
+);
+
+//==================
+// Github Strategy
+//==================
+passport.use(
+  new GitHubStrategy(
+    {
+      clientID: keys.githubAuth.clientID,
+      clientSecret: keys.githubAuth.clientSecret,
+      callbackURL: keys.githubAuth.callbackURL,
+      passReqToCallback: true
+      // (it's let us check if a user is logged in or not)
+      // simpliy Allows us to pass req from our route to below perameter
+    },
+    (req, token, refreshToken, profile, done) => {
+      console.log('github Profile => ', profile);
+      // github will return token and profile
+      // Asynchronous
+      process.nextTick(() => {
+        // Check the user is already logged in
+        if (!req.user) {
+          User.findOne({ 'github.id': profile.id }, (err, user) => {
+            if (err) return done(err);
+            if (user) {
+              // In this case
+              // (there is a user) or (may be have user id but no token)
+              // means user was linked at one point and then removed
+              // so add our token and profile information
+              if (!user.github.token) {
+                //may be have user id but no token
+                const githubUserReturnBack = user;
+                githubUserReturnBack.github.token = token;
+                githubUserReturnBack.github.name = profile.displayName;
+                if (profile.emails) {
+                  githubUserReturnBack.github.email = profile.emails[0].value;
+                }
+                githubUserReturnBack.save(e => {
+                  if (e) throw e;
+                  return done(null, githubUserReturnBack);
+                });
+              }
+              return done(null, user); // returning existing User already in the database
+            }
+            // Else User is totally New to us, create from schema
+            const newUser = new User();
+
+            newUser.github.id = profile.id;
+            newUser.github.token = token;
+            newUser.github.name = `${profile.displayName}`;
+            if (profile.emails) {
+              newUser.github.email = profile.emails[0].value;
+            }
+
+            newUser.save(error => {
+              if (error) {
+                throw error;
+              }
+              return done(null, newUser);
+            });
+          });
+        } else {
+          // So user already exists and is logged in, we have to link accounts
+          const user = req.user; // pull out the user from session
+
+          user.github.id = profile.id;
+          user.github.token = token;
+          user.github.name = profile.displayName;
+          if (profile.emails) {
+            user.github.email = profile.emails[0].value;
+          }
+
+          user.save(error => {
+            if (error) {
+              throw error;
+            }
+            return done(null, user);
+          });
+        }
+      });
+    }
+  )
+);
+
+//==================
+// LinkedIn Strategy
+//==================
+passport.use(
+  new LinkedInStrategy(
+    {
+      consumerKey: keys.linkedinAuth.clientID,
+      consumerSecret: keys.linkedinAuth.clientSecret,
+      callbackURL: keys.linkedinAuth.callbackURL,
+      passReqToCallback: true
+      // (it's let us check if a user is logged in or not)
+      // simpliy Allows us to pass req from our route to below perameter
+    },
+    (req, token, refreshToken, profile, done) => {
+      console.log('linkedin Profile => ', profile);
+      process.nextTick(() => {
+        // Check the user is already logged in
+        if (!req.user) {
+          User.findOne({ 'linkedin.id': profile.id }, (err, user) => {
+            if (err) return done(err);
+            if (user) {
+              // In this case
+              // (there is a user) or (may be have user id but no token)
+              // means user was linked at one point and then removed
+              // so add our token and profile information
+              if (!user.linkedin.token) {
+                const linkedinUserReturnBack = user;
+                linkedinUserReturnBack.linkedin.token = token;
+                linkedinUserReturnBack.linkedin.name = profile.displayName;
+                if (profile.emails) {
+                  linkedinUserReturnBack.linkedin.email = profile.emails[0].value;
+                }
+                linkedinUserReturnBack.save(e => {
+                  if (e) throw e;
+                  return done(null, linkedinUserReturnBack);
+                });
+              }
+              return done(null, user);
+            }
+            // Else User is totally New to us, create from schema
+            const newUser = new User();
+            newUser.linkedin.id = profile.id;
+            newUser.linkedin.token = token;
+            newUser.linkedin.name = profile.displayName;
+            if (profile.emails) {
+              newUser.linkedin.email = profile.emails[0].value;
+            }
+
+            newUser.save(error => {
+              if (error) throw error;
+              return done(null, newUser);
+            });
+          });
+        } else {
+          // So user already exists and is logged in, we have to link accounts
+          const user = req.user; // pull out the user from session
+
+          user.linkedin.id = profile.id;
+          user.linkedin.token = token;
+          user.linkedin.name = profile.displayName;
+          if (profile.emails) {
+            user.linkedin.email = profile.emails[0].value;
+          }
 
           user.save(error => {
             if (error) {

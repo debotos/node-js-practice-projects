@@ -23,6 +23,18 @@ const userSchema = mongoose.Schema({
     token: String,
     name: String,
     email: String
+  },
+  github: {
+    id: String,
+    token: String,
+    name: String,
+    email: String
+  },
+  linkedin: {
+    id: String,
+    token: String,
+    name: String,
+    email: String
   }
 });
 

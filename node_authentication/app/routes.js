@@ -72,6 +72,30 @@ module.exports = (app, passport) => {
     })
   );
 
+  // Github auth route
+  app.get('/auth/github', passport.authenticate('github'));
+
+  // github auth callback route
+  app.get(
+    '/auth/github/callback',
+    passport.authenticate('github', {
+      successRedirect: '/profile',
+      failureRedirect: '/'
+    })
+  );
+
+  // LinkedIn auth route
+  app.get('/auth/linkedin', passport.authenticate('linkedin'));
+
+  // LinkedIn auth callback route
+  app.get(
+    '/auth/linkedin/callback',
+    passport.authenticate('linkedin', {
+      successRedirect: '/profile',
+      failureRedirect: '/'
+    })
+  );
+
   // Google auth callback route
   // Place this callback route before /auth/google route
   // Else you will get 'TokenError: Code was already redeemed' or endless loading...
@@ -136,6 +160,27 @@ module.exports = (app, passport) => {
       failureRedirect: '/'
     })
   );
+  // Github
+  app.get('/connect/github', passport.authorize('github', { scope: 'email' }));
+  app.get(
+    '/connect/github/calback',
+    passport.authorize('github', {
+      successRedirect: '/porfile',
+      failureRedirect: '/'
+    })
+  );
+  // LinkedIn
+  app.get(
+    '/connect/linkedin',
+    passport.authorize('linkedin', { scope: ['r_basicprofile', 'r_emailaddress'] })
+  );
+  app.get(
+    '/connect/linkedin/calback',
+    passport.authorize('linkedin', {
+      successRedirect: '/porfile',
+      failureRedirect: '/'
+    })
+  );
   // Google
   app.get('/connect/google', passport.authorize('google', { scope: ['profile', 'email'] }));
   app.get(
@@ -176,6 +221,30 @@ module.exports = (app, passport) => {
   app.get('/unlink/twitter', (req, res) => {
     const user = req.user;
     user.twitter.token = undefined;
+    user.save(err => {
+      if (err) {
+        console.log(err);
+      }
+      res.redirect('/profile');
+    });
+  });
+
+  // Github
+  app.get('/unlink/github', (req, res) => {
+    const user = req.user;
+    user.github.token = undefined;
+    user.save(err => {
+      if (err) {
+        console.log(err);
+      }
+      res.redirect('/profile');
+    });
+  });
+
+  // LinkedIn
+  app.get('/unlink/linkedin', (req, res) => {
+    const user = req.user;
+    user.linkedin.token = undefined;
     user.save(err => {
       if (err) {
         console.log(err);

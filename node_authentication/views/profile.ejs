@@ -33,50 +33,50 @@
                   </p>
                 </header>
                 <% if (user.local.email) { %>
-                <div class="card-content">
-                  <div class="content">
-                    <strong>id</strong>:
-                    <div class="field-body">
-                      <div class="field">
-                        <div class="control">
-                          <input class="input" value="<%= user._id %>" type="text" placeholder="id will be here">
+                  <div class="card-content">
+                    <div class="content">
+                      <strong>id</strong>:
+                      <div class="field-body">
+                        <div class="field">
+                          <div class="control">
+                            <input class="input" value="<%= user._id %>" type="text" placeholder="id will be here">
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <br>
-                    <strong>email</strong>:
-                    <div class="field-body">
-                      <div class="field">
-                        <div class="control">
-                          <input class="input" value="<%= user.local.email %>" type="text" placeholder="email will be here">
+                      <br>
+                      <strong>email</strong>:
+                      <div class="field-body">
+                        <div class="field">
+                          <div class="control">
+                            <input class="input" value="<%= user.local.email %>" type="text" placeholder="email will be here">
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <strong>password</strong>:
-                    <div class="field-body">
-                      <div class="field">
-                        <div class="control">
-                          <input class="input" value="<%= user.local.password %>" type="text" placeholder="name will be here">
+                      <strong>password</strong>:
+                      <div class="field-body">
+                        <div class="field">
+                          <div class="control">
+                            <input class="input" value="<%= user.local.password %>" type="text" placeholder="name will be here">
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <br/>
-                    <div class="field-body">
-                      <div class="field">
-                        <div class="control">
-                          <a href="/unlink/local" class="button is-danger is-medium is-outlined is-rounded">Unlink</a>
+                      <br/>
+                      <div class="field-body">
+                        <div class="field">
+                          <div class="control">
+                            <a href="/unlink/local" class="button is-danger is-medium is-outlined is-rounded">Unlink</a>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <% } else { %>
-                <div class="card-content has-text-centered">
-                  <div class="content">
-                    <a href="/connect/local" class="button is-success is-medium is-outlined is-rounded">Connect Local</a>
-                  </div>
-                </div>
-                <% } %>
+                  <% } else { %>
+                    <div class="card-content has-text-centered">
+                      <div class="content">
+                        <a href="/connect/local" class="button is-success is-medium is-outlined is-rounded">Connect Local</a>
+                      </div>
+                    </div>
+                    <% } %>
               </div>
             </div>
             <!--Facebook-->
@@ -91,60 +91,60 @@
                   </p>
                 </header>
                 <% if (user.facebook.token) { %>
-                <div class="card-content">
-                  <div class="content">
-                    <strong>id</strong>:
-                    <div class="field-body">
-                      <div class="field">
-                        <div class="control">
-                          <input class="input" value="<%= user.facebook.id %>" type="text" placeholder="id will be here">
+                  <div class="card-content">
+                    <div class="content">
+                      <strong>id</strong>:
+                      <div class="field-body">
+                        <div class="field">
+                          <div class="control">
+                            <input class="input" value="<%= user.facebook.id %>" type="text" placeholder="id will be here">
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <strong>token</strong>:
-                    <br>
-                    <div class="field-body">
-                      <div class="field">
-                        <div class="control">
-                          <textarea class="textarea" placeholder="Token will be here">
-                            <%= user.facebook.token %>
-                          </textarea>
+                      <strong>token</strong>:
+                      <br>
+                      <div class="field-body">
+                        <div class="field">
+                          <div class="control">
+                            <textarea class="textarea" placeholder="Token will be here">
+                              <%= user.facebook.token %>
+                            </textarea>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <strong>email</strong>:
-                    <div class="field-body">
-                      <div class="field">
-                        <div class="control">
-                          <input class="input" value="<%= user.facebook.email %>" type="text" placeholder="email will be here">
+                      <strong>email</strong>:
+                      <div class="field-body">
+                        <div class="field">
+                          <div class="control">
+                            <input class="input" value="<%= user.facebook.email %>" type="text" placeholder="email will be here">
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <strong>name</strong>:
-                    <div class="field-body">
-                      <div class="field">
-                        <div class="control">
-                          <input class="input" value="<%= user.facebook.name %>" type="text" placeholder="name will be here">
+                      <strong>name</strong>:
+                      <div class="field-body">
+                        <div class="field">
+                          <div class="control">
+                            <input class="input" value="<%= user.facebook.name %>" type="text" placeholder="name will be here">
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <br/>
-                    <div class="field-body">
-                      <div class="field">
-                        <div class="control">
-                          <a href="/unlink/facebook" class="button is-danger is-medium is-outlined is-rounded">Unlink</a>
+                      <br/>
+                      <div class="field-body">
+                        <div class="field">
+                          <div class="control">
+                            <a href="/unlink/facebook" class="button is-danger is-medium is-outlined is-rounded">Unlink</a>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <% } else { %>
-                <div class="card-content has-text-centered">
-                  <div class="content">
-                    <a href="/connect/facebook" class="button is-success is-medium is-outlined is-rounded">Connect Facebook</a>
-                  </div>
-                </div>
-                <% } %>
+                  <% } else { %>
+                    <div class="card-content has-text-centered">
+                      <div class="content">
+                        <a href="/connect/facebook" class="button is-success is-medium is-outlined is-rounded">Connect Facebook</a>
+                      </div>
+                    </div>
+                    <% } %>
               </div>
             </div>
             <!--Google-->
@@ -159,60 +159,60 @@
                   </p>
                 </header>
                 <% if (user.google.token) { %>
-                <div class="card-content">
-                  <div class="content">
-                    <strong>id</strong>:
-                    <div class="field-body">
-                      <div class="field">
-                        <div class="control">
-                          <input class="input" value="<%= user.google.id %>" type="text" placeholder="id will be here">
+                  <div class="card-content">
+                    <div class="content">
+                      <strong>id</strong>:
+                      <div class="field-body">
+                        <div class="field">
+                          <div class="control">
+                            <input class="input" value="<%= user.google.id %>" type="text" placeholder="id will be here">
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <strong>token</strong>:
-                    <br>
-                    <div class="field-body">
-                      <div class="field">
-                        <div class="control">
-                          <textarea class="textarea" placeholder="Token will be here">
-                            <%= user.google.token %>
-                          </textarea>
+                      <strong>token</strong>:
+                      <br>
+                      <div class="field-body">
+                        <div class="field">
+                          <div class="control">
+                            <textarea class="textarea" placeholder="Token will be here">
+                              <%= user.google.token %>
+                            </textarea>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <strong>email</strong>:
-                    <div class="field-body">
-                      <div class="field">
-                        <div class="control">
-                          <input class="input" value="<%= user.google.email %>" type="text" placeholder="email will be here">
+                      <strong>email</strong>:
+                      <div class="field-body">
+                        <div class="field">
+                          <div class="control">
+                            <input class="input" value="<%= user.google.email %>" type="text" placeholder="email will be here">
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <strong>name</strong>:
-                    <div class="field-body">
-                      <div class="field">
-                        <div class="control">
-                          <input class="input" value="<%= user.google.name %>" type="text" placeholder="name will be here">
+                      <strong>name</strong>:
+                      <div class="field-body">
+                        <div class="field">
+                          <div class="control">
+                            <input class="input" value="<%= user.google.name %>" type="text" placeholder="name will be here">
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <br/>
-                    <div class="field-body">
-                      <div class="field">
-                        <div class="control">
-                          <a href="/unlink/google" class="button is-danger is-medium is-outlined is-rounded">Unlink</a>
+                      <br/>
+                      <div class="field-body">
+                        <div class="field">
+                          <div class="control">
+                            <a href="/unlink/google" class="button is-danger is-medium is-outlined is-rounded">Unlink</a>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <% } else { %>
-                <div class="card-content has-text-centered">
-                  <div class="content">
-                    <a href="/connect/google" class="button is-success is-medium is-outlined is-rounded">Connect Google</a>
-                  </div>
-                </div>
-                <% } %>
+                  <% } else { %>
+                    <div class="card-content has-text-centered">
+                      <div class="content">
+                        <a href="/connect/google" class="button is-success is-medium is-outlined is-rounded">Connect Google</a>
+                      </div>
+                    </div>
+                    <% } %>
               </div>
             </div>
             <!--Twitter-->
@@ -227,85 +227,211 @@
                   </p>
                 </header>
                 <% if (user.twitter.token) { %>
-                <div class="card-content">
-                  <div class="content">
-                    <strong>id</strong>:
-                    <div class="field-body">
-                      <div class="field">
-                        <div class="control">
-                          <input class="input" value="<%= user.twitter.id %>" type="text" placeholder="id will be here">
+                  <div class="card-content">
+                    <div class="content">
+                      <strong>id</strong>:
+                      <div class="field-body">
+                        <div class="field">
+                          <div class="control">
+                            <input class="input" value="<%= user.twitter.id %>" type="text" placeholder="id will be here">
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <strong>token</strong>:
-                    <br>
-                    <div class="field-body">
-                      <div class="field">
-                        <div class="control">
-                          <textarea class="textarea" placeholder="Token will be here">
-                            <%= user.twitter.token %>
-                          </textarea>
+                      <strong>token</strong>:
+                      <br>
+                      <div class="field-body">
+                        <div class="field">
+                          <div class="control">
+                            <textarea class="textarea" placeholder="Token will be here">
+                              <%= user.twitter.token %>
+                            </textarea>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <strong>username</strong>:
-                    <div class="field-body">
-                      <div class="field">
-                        <div class="control">
-                          <input class="input" value="<%= user.twitter.username %>" type="text" placeholder="email will be here">
+                      <strong>username</strong>:
+                      <div class="field-body">
+                        <div class="field">
+                          <div class="control">
+                            <input class="input" value="<%= user.twitter.username %>" type="text" placeholder="email will be here">
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <strong>display name</strong>:
-                    <div class="field-body">
-                      <div class="field">
-                        <div class="control">
-                          <input class="input" value="<%= user.twitter.displayName %>" type="text" placeholder="name will be here">
+                      <strong>display name</strong>:
+                      <div class="field-body">
+                        <div class="field">
+                          <div class="control">
+                            <input class="input" value="<%= user.twitter.displayName %>" type="text" placeholder="name will be here">
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <br/>
-                    <div class="field-body">
-                      <div class="field">
-                        <div class="control">
-                          <a href="/unlink/twitter" class="button is-danger is-medium is-outlined is-rounded">Unlink</a>
+                      <br/>
+                      <div class="field-body">
+                        <div class="field">
+                          <div class="control">
+                            <a href="/unlink/twitter" class="button is-danger is-medium is-outlined is-rounded">Unlink</a>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <% } else { %>
-                <div class="card-content has-text-centered">
-                  <div class="content">
-                    <a href="/connect/twitter" class="button is-success is-medium is-outlined is-rounded">Connect Twitter</a>
-                  </div>
-                </div>
-                <% } %>
+                  <% } else { %>
+                    <div class="card-content has-text-centered">
+                      <div class="content">
+                        <a href="/connect/twitter" class="button is-success is-medium is-outlined is-rounded">Connect Twitter</a>
+                      </div>
+                    </div>
+                    <% } %>
               </div>
             </div>
+          </div>
+
+          <!--Second row-->
+
+          <div class="columns is-desktop">
             <!--Github-->
-            <!--<div class="column">
+            <div class="column is-one-quarter">
               <div class="card">
                 <header class="card-header">
                   <p class="card-header-title">
-                    Github
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Github</span>
                   </p>
                 </header>
-                <div class="card-content">
-                  <div class="content">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.
-                    <a href="#">@bulmaio</a>.
-                    <a href="#">#css</a>
-                    <a href="#">#responsive</a>
-                    <br>
-                    <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+                <% if (user.github.token) { %>
+                  <div class="card-content">
+                    <div class="content">
+                      <strong>id</strong>:
+                      <div class="field-body">
+                        <div class="field">
+                          <div class="control">
+                            <input class="input" value="<%= user.github.id %>" type="text" placeholder="id will be here">
+                          </div>
+                        </div>
+                      </div>
+                      <strong>token</strong>:
+                      <br>
+                      <div class="field-body">
+                        <div class="field">
+                          <div class="control">
+                            <textarea class="textarea" placeholder="Token will be here">
+                              <%= user.github.token %>
+                            </textarea>
+                          </div>
+                        </div>
+                      </div>
+                      <strong>email</strong>:
+                      <div class="field-body">
+                        <div class="field">
+                          <div class="control">
+                            <input class="input" value="<%= user.github.email %>" type="text" placeholder="email will be here">
+                          </div>
+                        </div>
+                      </div>
+                      <strong>name</strong>:
+                      <div class="field-body">
+                        <div class="field">
+                          <div class="control">
+                            <input class="input" value="<%= user.github.name %>" type="text" placeholder="name will be here">
+                          </div>
+                        </div>
+                      </div>
+                      <br/>
+                      <div class="field-body">
+                        <div class="field">
+                          <div class="control">
+                            <a href="/unlink/github" class="button is-danger is-medium is-outlined is-rounded">Unlink</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                </div>
+                  <% } else { %>
+                    <div class="card-content has-text-centered">
+                      <div class="content">
+                        <a href="/connect/github" class="button is-success is-medium is-outlined is-rounded">Connect github</a>
+                      </div>
+                    </div>
+                    <% } %>
               </div>
-            </div>-->
+            </div>
+            <!--Github End-->
+
+            <!--linkedin-->
+            <div class="column is-one-quarter">
+              <div class="card">
+                <header class="card-header">
+                  <p class="card-header-title">
+                    <span class="icon">
+                      <i class="fab fa-linkedin"></i>
+                    </span>
+                    <span>LinkedIn</span>
+                  </p>
+                </header>
+                <% if (user.linkedin.token) { %>
+                  <div class="card-content">
+                    <div class="content">
+                      <strong>id</strong>:
+                      <div class="field-body">
+                        <div class="field">
+                          <div class="control">
+                            <input class="input" value="<%= user.linkedin.id %>" type="text" placeholder="id will be here">
+                          </div>
+                        </div>
+                      </div>
+                      <strong>token</strong>:
+                      <br>
+                      <div class="field-body">
+                        <div class="field">
+                          <div class="control">
+                            <textarea class="textarea" placeholder="Token will be here">
+                              <%= user.linkedin.token %>
+                            </textarea>
+                          </div>
+                        </div>
+                      </div>
+                      <strong>email</strong>:
+                      <div class="field-body">
+                        <div class="field">
+                          <div class="control">
+                            <input class="input" value="<%= user.linkedin.email %>" type="text" placeholder="email will be here">
+                          </div>
+                        </div>
+                      </div>
+                      <strong>name</strong>:
+                      <div class="field-body">
+                        <div class="field">
+                          <div class="control">
+                            <input class="input" value="<%= user.linkedin.name %>" type="text" placeholder="name will be here">
+                          </div>
+                        </div>
+                      </div>
+                      <br/>
+                      <div class="field-body">
+                        <div class="field">
+                          <div class="control">
+                            <a href="/unlink/linkedin" class="button is-danger is-medium is-outlined is-rounded">Unlink</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <% } else { %>
+                    <div class="card-content has-text-centered">
+                      <div class="content">
+                        <a href="/connect/linkedin" class="button is-success is-medium is-outlined is-rounded">Connect LinkedIn</a>
+                      </div>
+                    </div>
+                    <% } %>
+              </div>
+            </div>
+            <!--linkedin End-->
           </div>
         </div>
       </div>
+    </div>
+    </div>
     </div>
   </section>
 </body>
