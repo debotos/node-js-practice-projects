@@ -51,7 +51,7 @@ module.exports = (app, passport) => {
     })
   );
 
-  // Face auth callback route
+  // Facebook auth callback route
   app.get(
     '/auth/facebook/callback',
     passport.authenticate('facebook', {
@@ -60,9 +60,139 @@ module.exports = (app, passport) => {
     })
   );
 
+  // Twitter auth route
+  app.get('/auth/twitter', passport.authenticate('twitter'));
+
+  // Twitter auth callback route
+  app.get(
+    '/auth/twitter/callback',
+    passport.authenticate('twitter', {
+      successRedirect: '/profile',
+      failureRedirect: '/'
+    })
+  );
+
+  // Google auth callback route
+  // Place this callback route before /auth/google route
+  // Else you will get 'TokenError: Code was already redeemed' or endless loading...
+  app.get(
+    '/auth/google/callback',
+    passport.authenticate('google', {
+      successRedirect: '/profile',
+      failureRedirect: '/'
+    })
+  );
+
+  // Google auth route
+  app.get(
+    '/auth/google',
+    passport.authenticate('google', {
+      scope: ['profile', 'email']
+    })
+  );
+
   // Logout
   app.get('/logout', (req, res) => {
-    res.logout();
+    req.logout();
     res.redirect('/');
+  });
+
+  //=========================================
+  // Authorize (Routes for Already Logged In)
+  //=========================================
+  // Local
+  app.get('/connect/local', (req, res) => {
+    res.render('connect-local.ejs', { message: req.flash('signupMessage') });
+  });
+
+  app.post(
+    '/connect/local',
+    passport.authenticate('local-signup', {
+      successRedirect: '/profile',
+      failureRedirect: '/connect/local',
+      failureFlash: true
+    })
+  );
+  // Facebook
+  app.get(
+    '/connect/facebook',
+    passport.authorize('facebook', {
+      scope: ['public_profile', 'email']
+    })
+  );
+  app.get(
+    '/connect/facebook/callback',
+    passport.authorize('facebook', {
+      successRedirect: '/profile',
+      failureRedirect: '/'
+    })
+  );
+  // Twitter
+  app.get('/connect/twitter', passport.authorize('twitter', { scope: 'email' }));
+  app.get(
+    '/connect/twitter/calback',
+    passport.authorize('twitter', {
+      successRedirect: '/porfile',
+      failureRedirect: '/'
+    })
+  );
+  // Google
+  app.get('/connect/google', passport.authorize('google', { scope: ['profile', 'email'] }));
+  app.get(
+    '/connect/google/callback',
+    passport.authorize('google', {
+      successRedirect: '/profile',
+      failureRedirect: '/'
+    })
+  );
+  //=========================================================
+  // Unlink accounts
+  // Local
+  app.get('/unlink/local', (req, res) => {
+    const user = req.user;
+    user.local.email = undefined;
+    user.local.password = undefined;
+    user.save(err => {
+      if (err) {
+        console.log(err);
+      }
+      res.redirect('/profile');
+    });
+  });
+
+  // Facebook
+  app.get('/unlink/facebook', (req, res) => {
+    const user = req.user;
+    user.facebook.token = undefined;
+    user.save(error => {
+      if (error) {
+        console.log(error);
+      }
+      res.redirect('/profile');
+    });
+  });
+
+  // Twitter
+  app.get('/unlink/twitter', (req, res) => {
+    const user = req.user;
+    user.twitter.token = undefined;
+    user.save(err => {
+      if (err) {
+        console.log(err);
+      }
+      res.redirect('/profile');
+    });
+  });
+
+  // Google
+  app.get('/unlink/google', (req, res) => {
+    const user = req.user;
+    user.google.token = undefined;
+    user.save(err => {
+      if (err) {
+        console.log(err);
+      }
+      res.redirect('/profile');
+    });
   });
 };

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Node Authentication | Profile</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+  <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+</head>
+
+<body>
+  <section class="section">
+    <div class="container">
+      <div class="card">
+        <h1 class="title has-text-centered" style="padding-top: 10px;">
+          All Profile
+        </h1>
+        <div class="has-text-centered">
+          <a href="/logout" class="button is-danger is-medium is-outlined is-rounded">Logout</a>
+        </div>
+        <div class="card-content">
+          <div class="columns is-desktop">
+            <!--Local-->
+            <div class="column is-one-quarter">
+              <div class="card">
+                <header class="card-header">
+                  <p class="card-header-title">
+                    <span class="icon">
+                      <i class="fas fa-user"></i>
+                    </span>
+                    <span>Local</span>
+                  </p>
+                </header>
+                <% if (user.local.email) { %>
+                <div class="card-content">
+                  <div class="content">
+                    <strong>id</strong>:
+                    <div class="field-body">
+                      <div class="field">
+                        <div class="control">
+                          <input class="input" value="<%= user._id %>" type="text" placeholder="id will be here">
+                        </div>
+                      </div>
+                    </div>
+                    <br>
+                    <strong>email</strong>:
+                    <div class="field-body">
+                      <div class="field">
+                        <div class="control">
+                          <input class="input" value="<%= user.local.email %>" type="text" placeholder="email will be here">
+                        </div>
+                      </div>
+                    </div>
+                    <strong>password</strong>:
+                    <div class="field-body">
+                      <div class="field">
+                        <div class="control">
+                          <input class="input" value="<%= user.local.password %>" type="text" placeholder="name will be here">
+                        </div>
+                      </div>
+                    </div>
+                    <br/>
+                    <div class="field-body">
+                      <div class="field">
+                        <div class="control">
+                          <a href="/unlink/local" class="button is-danger is-medium is-outlined is-rounded">Unlink</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <% } else { %>
+                <div class="card-content has-text-centered">
+                  <div class="content">
+                    <a href="/connect/local" class="button is-success is-medium is-outlined is-rounded">Connect Local</a>
+                  </div>
+                </div>
+                <% } %>
+              </div>
+            </div>
+            <!--Facebook-->
+            <div class="column is-one-quarter">
+              <div class="card">
+                <header class="card-header">
+                  <p class="card-header-title">
+                    <span class="icon">
+                      <i class="fab fa-facebook"></i>
+                    </span>
+                    <span>Facebook</span>
+                  </p>
+                </header>
+                <% if (user.facebook.token) { %>
+                <div class="card-content">
+                  <div class="content">
+                    <strong>id</strong>:
+                    <div class="field-body">
+                      <div class="field">
+                        <div class="control">
+                          <input class="input" value="<%= user.facebook.id %>" type="text" placeholder="id will be here">
+                        </div>
+                      </div>
+                    </div>
+                    <strong>token</strong>:
+                    <br>
+                    <div class="field-body">
+                      <div class="field">
+                        <div class="control">
+                          <textarea class="textarea" placeholder="Token will be here">
+                            <%= user.facebook.token %>
+                          </textarea>
+                        </div>
+                      </div>
+                    </div>
+                    <strong>email</strong>:
+                    <div class="field-body">
+                      <div class="field">
+                        <div class="control">
+                          <input class="input" value="<%= user.facebook.email %>" type="text" placeholder="email will be here">
+                        </div>
+                      </div>
+                    </div>
+                    <strong>name</strong>:
+                    <div class="field-body">
+                      <div class="field">
+                        <div class="control">
+                          <input class="input" value="<%= user.facebook.name %>" type="text" placeholder="name will be here">
+                        </div>
+                      </div>
+                    </div>
+                    <br/>
+                    <div class="field-body">
+                      <div class="field">
+                        <div class="control">
+                          <a href="/unlink/facebook" class="button is-danger is-medium is-outlined is-rounded">Unlink</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <% } else { %>
+                <div class="card-content has-text-centered">
+                  <div class="content">
+                    <a href="/connect/facebook" class="button is-success is-medium is-outlined is-rounded">Connect Facebook</a>
+                  </div>
+                </div>
+                <% } %>
+              </div>
+            </div>
+            <!--Google-->
+            <div class="column is-one-quarter">
+              <div class="card">
+                <header class="card-header">
+                  <p class="card-header-title">
+                    <span class="icon">
+                      <i class="fab fa-google-plus-g"></i>
+                    </span>
+                    <span>Google</span>
+                  </p>
+                </header>
+                <% if (user.google.token) { %>
+                <div class="card-content">
+                  <div class="content">
+                    <strong>id</strong>:
+                    <div class="field-body">
+                      <div class="field">
+                        <div class="control">
+                          <input class="input" value="<%= user.google.id %>" type="text" placeholder="id will be here">
+                        </div>
+                      </div>
+                    </div>
+                    <strong>token</strong>:
+                    <br>
+                    <div class="field-body">
+                      <div class="field">
+                        <div class="control">
+                          <textarea class="textarea" placeholder="Token will be here">
+                            <%= user.google.token %>
+                          </textarea>
+                        </div>
+                      </div>
+                    </div>
+                    <strong>email</strong>:
+                    <div class="field-body">
+                      <div class="field">
+                        <div class="control">
+                          <input class="input" value="<%= user.google.email %>" type="text" placeholder="email will be here">
+                        </div>
+                      </div>
+                    </div>
+                    <strong>name</strong>:
+                    <div class="field-body">
+                      <div class="field">
+                        <div class="control">
+                          <input class="input" value="<%= user.google.name %>" type="text" placeholder="name will be here">
+                        </div>
+                      </div>
+                    </div>
+                    <br/>
+                    <div class="field-body">
+                      <div class="field">
+                        <div class="control">
+                          <a href="/unlink/google" class="button is-danger is-medium is-outlined is-rounded">Unlink</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <% } else { %>
+                <div class="card-content has-text-centered">
+                  <div class="content">
+                    <a href="/connect/google" class="button is-success is-medium is-outlined is-rounded">Connect Google</a>
+                  </div>
+                </div>
+                <% } %>
+              </div>
+            </div>
+            <!--Twitter-->
+            <div class="column is-one-quarter">
+              <div class="card">
+                <header class="card-header">
+                  <p class="card-header-title">
+                    <span class="icon">
+                      <i class="fab fa-twitter"></i>
+                    </span>
+                    <span>Twitter</span>
+                  </p>
+                </header>
+                <% if (user.twitter.token) { %>
+                <div class="card-content">
+                  <div class="content">
+                    <strong>id</strong>:
+                    <div class="field-body">
+                      <div class="field">
+                        <div class="control">
+                          <input class="input" value="<%= user.twitter.id %>" type="text" placeholder="id will be here">
+                        </div>
+                      </div>
+                    </div>
+                    <strong>token</strong>:
+                    <br>
+                    <div class="field-body">
+                      <div class="field">
+                        <div class="control">
+                          <textarea class="textarea" placeholder="Token will be here">
+                            <%= user.twitter.token %>
+                          </textarea>
+                        </div>
+                      </div>
+                    </div>
+                    <strong>username</strong>:
+                    <div class="field-body">
+                      <div class="field">
+                        <div class="control">
+                          <input class="input" value="<%= user.twitter.username %>" type="text" placeholder="email will be here">
+                        </div>
+                      </div>
+                    </div>
+                    <strong>display name</strong>:
+                    <div class="field-body">
+                      <div class="field">
+                        <div class="control">
+                          <input class="input" value="<%= user.twitter.displayName %>" type="text" placeholder="name will be here">
+                        </div>
+                      </div>
+                    </div>
+                    <br/>
+                    <div class="field-body">
+                      <div class="field">
+                        <div class="control">
+                          <a href="/unlink/twitter" class="button is-danger is-medium is-outlined is-rounded">Unlink</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <% } else { %>
+                <div class="card-content has-text-centered">
+                  <div class="content">
+                    <a href="/connect/twitter" class="button is-success is-medium is-outlined is-rounded">Connect Twitter</a>
+                  </div>
+                </div>
+                <% } %>
+              </div>
+            </div>
+            <!--Github-->
+            <!--<div class="column">
+              <div class="card">
+                <header class="card-header">
+                  <p class="card-header-title">
+                    Github
+                  </p>
+                </header>
+                <div class="card-content">
+                  <div class="content">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.
+                    <a href="#">@bulmaio</a>.
+                    <a href="#">#css</a>
+                    <a href="#">#responsive</a>
+                    <br>
+                    <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+                  </div>
+                </div>
+              </div>
+            </div>-->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+
+</html>
